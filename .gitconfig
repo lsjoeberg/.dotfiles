@@ -1,0 +1,134 @@
+[user]
+	name = Lars Sjöberg
+	email = lsjoeberg@protonmail.com
+	signingkey = C21A7B71D7E47466
+[color]
+	ui = auto
+[pretty]
+	lg = %C(yellow)%h %C(blue)%ad %C(green)%<(8,trunc)%aN %Creset%C(normal dim)•%Creset%C(bold)%<(50,trunc) %s %C(auto)%D
+[alias]
+	au = add -u                    # add modified files
+	ap = add -p                    # add patches interactively
+	an = add -N                    # track new file without adding to index
+	br = branch
+	bd = branch -D
+	bl = "!f() { git -P branch -vv; }; f"
+	ci = commit
+	ca = commit --amend --no-edit  # append index to previous commit
+	cia = commit --amend           # append index to previous commit, edit msg
+	co = checkout
+	cb = checkout -b
+	cs = "!f() { git checkout stash@{\"$1\"} -- \"$2\"; }; f"
+	cf = "!f() { git branch -v | fzf --ansi | cut -f 2 -w | xargs -o git checkout; }; f"
+	cp = cherry-pick
+	st = status --short            # concise status
+	df = diff
+	ds = diff --stat
+	dsb = diff --stat origin/main...
+	dss = diff --shortstat
+	dfc = diff --cached
+	dt = difftool
+	mt = mergetool
+	ss = stash push                # "stash save"
+	sp = stash pop
+	sa = stash apply
+	sl = stash list
+	fa = fetch --all -p -v
+	ru = remote -v update -p
+	# rebasing
+	rb = rebase
+	ri = "!f() { git lg \"${1:-main..}\" | fzf --ansi | cut -c -7 | xargs -o git rebase -i; }; f"
+	rc = rebase --continue
+	ra = rebase --abort
+	rs = rebase --skip
+	ru = "!f() { rebase --onto origin/\"$(git branch --show-current)\"; }; f"
+	rf = "!f() { git rebase -i --autosquash \"${1:-main}\"; }; f"
+	# fixup
+	fu = "!f() { git lg \"${1:--10}\" | fzf --ansi | cut -c -7 | xargs -o git commit --fixup; }; f"
+	# reflog
+	rl = reflog
+	# reset
+	rh = reset --hard
+	rhu = "!f() { git reset --hard origin/\"$(git branch --show-current)\"; }; f"
+	# interacting with remote
+	mf = merge --ff-only
+	mn = merge --no-ff
+	ma = merge --abort
+	mpr = merge --no-ff --no-commit
+	up = !git remote update -p && !git merge --ff-only
+	pbu = "!f() { git push -u origin \"$(git branch --show-current)\"; }; f"
+	mfu = "!f() { git merge --ff-only origin/\"$(git rev-parse --abbrev-ref HEAD)\"; }; f"
+	mnu = "!f() { git merge --no-ff origin/\"$(git rev-parse --abbrev-ref HEAD)\"; }; f"
+	# list all contributors and their contribtion
+	contributors = shortlog --summary --numbered --email
+	# log
+	lg = log \
+		--date=format:'%y%m%d %H:%M' \
+		--color=always \
+		--pretty=lg
+	lgb = lg main..
+	lga = log --all \
+		--date=format:'%y%m%d %H:%M' \
+		--color=always \
+		--pretty=lg
+	lgg = log --graph \
+		--date=format:'%y%m%d %H:%M' \
+		--color=always \
+		--pretty=lg
+	lgs = !git-stat-sum \"$@\"
+	# add newline to eol for all improper files
+	newlines = "!f() { \
+	git ls-files -z | while IFS= read -rd '' f; do tail -c1 < \"$f\" | read -r _ || echo >> \"$f\"; done; \
+	}; f"
+[core]
+	editor = nvim
+	pager = less -R -S
+[diff]
+	tool = vimdiff
+	algorithm = histogram
+	colorMoved = plain
+	mnemonicPrefix = true
+	renames = true
+[difftool]
+	prompt = false
+	trustExitCode = true
+[merge]
+	tool = vimdiff
+	conflictstyle = zdiff3
+[mergetool]
+	prompt = false
+[push]
+	default = simple
+[credential]
+	helper = store
+[log]
+	mailmap = true
+[pull]
+	ff = only
+	rebase = true
+[init]
+	defaultBranch = main
+[grep]
+	extendRegexp = true
+[rebase]
+	autoSquash = true
+	autoStash = true
+	updateRefs = true
+[mailmap]
+	file = /home/lars/.mailmap
+[column]
+	ui = auto
+[branch]
+	sort = -committerdate
+[tag]
+	sort = version:refname
+	gpgSign = true
+[fetch]
+	prune = true
+	pruneTags = true
+	all = true
+[rerere]
+	enabled = true
+	autoupdate = true
+[commit]
+	gpgsign = true
