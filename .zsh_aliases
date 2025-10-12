@@ -1,0 +1,35 @@
+# tree: prettioes output
+alias tree='tree -AC --dirsfirst'
+
+# grep: line numbers (-n), ignore case (-i), colors
+alias grep='grep --color'
+
+# ls: default list
+alias ls='ls -lvAh --color=auto --group-directories-first'
+
+# less: show colors
+alias less='less -R'
+
+# cd: quickly navigate upwards in directories
+alias ~='cd ~'
+alias /='cd /'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+
+# git
+alias g='git'
+if command -v lazygit >/dev/null 2>&1; then
+    alias lg='lazygit'
+fi
+
+# kubernetes
+if command -v kubectl >/dev/null 2>&1; then
+    alias k='kubectl'
+fi
+
+# nvim
+if command -v nvim >/dev/null 2>&1; then
+    alias v='nvim'
+fi
