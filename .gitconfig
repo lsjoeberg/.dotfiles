@@ -82,7 +82,13 @@
 	}; f"
 [core]
 	editor = nvim
-	pager = less -R -S
+	pager = delta
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true
+	dark = true
+	syntax-theme = Nord
 [diff]
 	tool = vimdiff
 	algorithm = histogram
