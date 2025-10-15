@@ -5,7 +5,12 @@ return {
         -- Automatically install LSPs and related tools to stdpath for Neovim
         -- Mason must be loaded before its dependents so we need to set it up here.
         -- NOTE: `opts = {}` is the same as calling `require('mason').setup({})`
-        { 'mason-org/mason.nvim', opts = {} },
+        {
+            'mason-org/mason.nvim',
+            opts = {
+                ensure_installed = { "goimports", "gofumpt" }
+            }
+        },
         'mason-org/mason-lspconfig.nvim',
         'WhoIsSethDaniel/mason-tool-installer.nvim',
 
@@ -15,7 +20,6 @@ return {
         -- Allows extra capabilities provided by blink.cmp
         'saghen/blink.cmp',
     },
-
     config = function()
         -- Brief aside: **What is LSP?**
         --
@@ -196,7 +200,43 @@ return {
         --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
         local servers = {
             -- clangd = {},
-            -- gopls = {},
+            gopls = {
+                settings = {
+                    gopls = {
+                        gofumpt = true,
+                        codelenses = {
+                            gc_details = false,
+                            generate = true,
+                            regenerate_cgo = true,
+                            run_govulncheck = true,
+                            test = true,
+                            tidy = true,
+                            upgrade_dependency = true,
+                            vendor = true,
+                        },
+                        hints = {
+                            assignVariableTypes = true,
+                            compositeLiteralFields = true,
+                            compositeLiteralTypes = true,
+                            constantValues = true,
+                            functionTypeParameters = true,
+                            parameterNames = true,
+                            rangeVariableTypes = true,
+                        },
+                        analyses = {
+                            nilness = true,
+                            unusedparams = true,
+                            unusedwrite = true,
+                            useany = true,
+                        },
+                        usePlaceholders = true,
+                        completeUnimported = true,
+                        staticcheck = true,
+                        directoryFilters = { "-.git", "-.vscode", "-.idea", "-.vscode-test", "-node_modules" },
+                        semanticTokens = true,
+                    },
+                },
+            },
             -- pyright = {},
             -- rust_analyzer = {},
             -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
