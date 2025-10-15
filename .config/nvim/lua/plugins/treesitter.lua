@@ -3,6 +3,11 @@ return {
     branch = 'master',
     lazy = false,
     build = ":TSUpdate",
+    opts = {
+        ensure_installed = {
+            "go", "gomod", "gowork", "gosum",
+        }
+    },
     config = function()
         local configs = require("nvim-treesitter.configs")
         configs.setup({
