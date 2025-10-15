@@ -9,6 +9,15 @@ export LANG="en_GB.UTF-8"
 export LC_ALL="en_GB.UTF-8"
 export LC_CTYPE="en_GB.UTF-8"
 
+# editor
+if command -v nvim >/dev/null 2>&1; then
+    export EDITOR=nvim
+elif command -v vim >/dev/null 2>&1; then
+    export EDITOR=vim
+else
+    export EDITOR=vi
+fi
+
 # go
 if [ -d "${HOME}/go" ]; then
     export GOPATH="${HOME}/go"
