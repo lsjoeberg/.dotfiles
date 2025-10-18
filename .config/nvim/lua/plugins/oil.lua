@@ -1,8 +1,17 @@
 return {
   "stevearc/oil.nvim",
+  version = "*",
   ---@module 'oil'
   ---@type oil.SetupOpts
-  opts = {},
+  opts = {
+    skip_confirm_for_simple_edits = true,
+    view_options = {
+      show_hidden = true,
+    },
+    keymaps = {
+      ["<Esc>"] = { "actions.close", mode = "n" },
+    },
+  },
   -- Optional dependencies
   -- dependencies = { { "nvim-mini/mini.icons", opts = {} } },
   dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
