@@ -4,5 +4,5 @@ return {
   opts = {
     input = { enabled = true },
     picker = { enabled = true },
-  }
+  },
 }
