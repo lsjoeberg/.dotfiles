@@ -1,7 +1,6 @@
 [user]
 	name = Lars Sjöberg
 	email = lsjoeberg@protonmail.com
-	signingkey = C21A7B71D7E47466
 [color]
 	ui = auto
 [pretty]
@@ -128,7 +127,6 @@
 	sort = -committerdate
 [tag]
 	sort = version:refname
-	gpgSign = true
 [fetch]
 	prune = true
 	pruneTags = true
@@ -136,5 +134,3 @@
 [rerere]
 	enabled = true
 	autoupdate = true
-[commit]
-	gpgsign = true
