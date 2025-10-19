@@ -98,10 +98,13 @@
 	prompt = false
 	trustExitCode = true
 [merge]
-	tool = vimdiff
+	tool = nvim
 	conflictstyle = zdiff3
 [mergetool]
 	prompt = false
+	keepBackup = false
+[mergetool "nvim"]
+	cmd = "nvim -d -c \"wincmd l\" -c \"norm ]c\" \"$LOCAL\" \"$MERGED\" \"$REMOTE\""
 [push]
 	default = simple
 [credential]
