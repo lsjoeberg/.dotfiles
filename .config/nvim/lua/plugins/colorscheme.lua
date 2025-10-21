@@ -10,6 +10,10 @@ return {
       bold_keywords = true,
       reduce_blue = true,
       swap_backgrounds = false,
+      cursorline = {
+        theme = "light",
+        blend = 0.5,
+      }
     })
     require("nordic").load()
   end,
