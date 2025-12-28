@@ -18,10 +18,10 @@ if command -v fzf >/dev/null 2>&1; then
 fi
 
 # go
-if [ -d "${HOME}/go" ]; then
+if [ -d "/usr/local/go" ]; then
     export GOPATH="${HOME}/go"
     export GOBIN="${GOPATH}/bin"
-    export PATH="${PATH}:${GOBIN}"
+    export PATH="${PATH}:/usr/local/go/bin:${GOBIN}"
 fi
 
 # cargo
