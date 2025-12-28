@@ -39,3 +39,5 @@ require("lazy").setup({
 require("config.options")
 -- Keymaps
 require("config.keymaps")
+-- Mappings for filetype detection
+require("config.filetype")
