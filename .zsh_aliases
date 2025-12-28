@@ -33,3 +33,9 @@ fi
 if command -v nvim >/dev/null 2>&1; then
     alias v='nvim'
 fi
+
+# eza
+if command -v eza >/dev/null 2>&1; then
+    alias l='eza -a -lb --icons=auto --group-directories-first'
+    alias lt='l --tree'
+fi
