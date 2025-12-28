@@ -18,6 +18,13 @@ else
     export EDITOR=vi
 fi
 
+# From man zshzle:
+# If one of the VISUAL or EDITOR environment variables contain the string 'vi'
+# when the shell starts up then it will be viins, otherwise it will be emacs.
+# bindkey's -e and -v options provide a convenient way to override this default
+# choice.
+bindkey -e
+
 # fzf colors
 if command -v fzf >/dev/null 2>&1; then
     export FZF_DEFAULT_OPTS='
