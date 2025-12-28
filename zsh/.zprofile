@@ -34,3 +34,9 @@ if command -v sccache >/dev/null 2>&1; then
     export SCCACHE_DIRECT=true
     export RUSTC_WRAPPER=sccache
 fi
+
+# asdf
+if command -v asdf >/dev/null 2>&1; then
+    export PATH="${PATH}:${ASDF_DATA_DIR:-$HOME/.asdf}/shims"
+    fpath=(${ASDF_DATA_DIR:-$HOME/.asdf}/completions $fpath)
+fi
