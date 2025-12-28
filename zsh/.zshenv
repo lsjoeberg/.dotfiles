@@ -8,8 +8,11 @@
 
 # -- PATH --
 export PATH="$PATH:$HOME/.local/bin:$HOME/bin"
-if [ -d "/opt/nvim-linux-x86_64/bin" ]; then
-    export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
+
+# neovim: manual install; e.g. '/opt/nvim-{linux,macos}-x86_64'
+nvim_install_dir="$(find /opt -maxdepth 1 -type d -name 'nvim-*')"
+if [ -d "$nvim_install_dir/bin" ]; then
+    export PATH="$PATH:$nvim_install_dir/bin"
 fi
 
 # -- EDITOR --
