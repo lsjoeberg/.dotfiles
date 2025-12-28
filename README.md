@@ -1,5 +1,11 @@
 # dotfiles
 
+Deploy packages, e.g. `nvim`, selectively with:
+
+```sh
+stow -v <pkg>
+```
+
 ## Prerequisites
 
 - git
@@ -7,15 +13,18 @@
 
 ## Programs
 
-### Shell: Zsh
+### Terminal
 
+- Shell: Zsh
 - Emulator: ghostty
 - Prompt: starship
 - Package manager: antidote
+- Editor: neovim
 
 ### Essentials
 
 - bat
+- eza
 - fd
 - fzf
 - ripgrep
