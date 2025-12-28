@@ -4,9 +4,6 @@ HISTSIZE=10000
 SAVEHIST=10000
 setopt appendhistory
 
-# -- PATH --
-export PATH="$PATH:$HOME/.local/bin:$HOME/bin"
-
 # -- SHELL: STARSHIP --
 if command -v starship >/dev/null 2>&1; then
     eval "$(starship init zsh)"
@@ -42,7 +39,7 @@ fi
 
 # nord dircolors
 if [ -r ~/.dir_colors ]; then
-    eval "$(dircolors ~/.dir_colors)"
+    eval "$(dircolors "$HOME/.dir_colors")"
 fi
 
 # completions
