@@ -36,6 +36,6 @@ fi
 
 # eza
 if command -v eza >/dev/null 2>&1; then
-    alias l='eza -a -lb --icons=auto --group-directories-first'
-    alias lt='l --tree'
+    alias ll='eza -a -lb --icons=auto --group-directories-first'
+    alias lt='ll --tree'
 fi
