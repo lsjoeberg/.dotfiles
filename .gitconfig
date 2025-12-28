@@ -6,20 +6,25 @@
 [pretty]
 	lg = %C(yellow)%h %C(blue)%ad %C(green)%<(8,trunc)%aN %Creset%C(normal dim)•%Creset%C(bold)%<(50,trunc) %s %C(auto)%D
 [alias]
+	# staging
 	au = add -u                    # add modified files
 	ap = add -p                    # add patches interactively
 	an = add -N                    # track new file without adding to index
+	# branching and checkout
 	br = branch
 	bd = branch -D
 	bl = "!f() { git -P branch -vv; }; f"
-	ci = commit
-	ca = commit --amend --no-edit  # append index to previous commit
-	cia = commit --amend           # append index to previous commit, edit msg
 	co = checkout
 	cb = checkout -b
 	cs = "!f() { git checkout stash@{\"$1\"} -- \"$2\"; }; f"
-	cf = "!f() { git branch -v | fzf --ansi | cut -f 2 -w | xargs -o git checkout; }; f"
+	cf = "!f() { git branch -v | fzf --ansi | tr -s ' ' | cut -f 2 -d' ' | xargs -o git checkout; }; f"
+	# committing
+	ci = commit
+	ca = commit --amend --no-edit  # append index to previous commit
+	cia = commit --amend           # append index to previous commit, edit msg
 	cp = cherry-pick
+	# status and diff
+	sh = show --stat               # show HEAD stats
 	st = status --short            # concise status
 	df = diff
 	ds = diff --stat
