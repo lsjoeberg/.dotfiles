@@ -39,3 +39,20 @@ if command -v eza >/dev/null 2>&1; then
     alias ll='eza -a -lb --icons=auto --group-directories-first'
     alias lt='ll --tree -I .git'
 fi
+
+# decode jwt
+jwtd() {
+    if [[ -x $(command -v jq) ]]; then
+         jq -R 'split(".") | .[0],.[1] | @base64d | fromjson' <<< "${1}"
+         echo "Signature: $(echo "${1}" | awk -F'.' '{print $3}')"
+    fi
+}
+
+# SSH fzf
+sshf () {
+    local server
+    server=$(grep -E '^Host ' ~/.ssh/config | awk '{print $2}' | fzf)
+    if [[ -n $server ]] then
+        ssh $server
+    fi
+}
