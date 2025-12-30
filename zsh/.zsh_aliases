@@ -37,5 +37,5 @@ fi
 # eza
 if command -v eza >/dev/null 2>&1; then
     alias ll='eza -a -lb --icons=auto --group-directories-first'
-    alias lt='ll --tree'
+    alias lt='ll --tree -I .git'
 fi
