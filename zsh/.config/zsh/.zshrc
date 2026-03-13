@@ -4,20 +4,22 @@ HISTSIZE=10000
 SAVEHIST=10000
 setopt appendhistory
 
+ZCFG="${ZDOTDIR:-$HOME}"
+
 # -- SHELL: STARSHIP --
 if command -v starship >/dev/null 2>&1; then
     eval "$(starship init zsh)"
 fi
 
 # -- PLUGINS: ANTIDOTE --
-if [ -f ~/.antidote/antidote.zsh ]; then
-    source ~/.antidote/antidote.zsh
+if [ -f "$ZCFG/.antidote/antidote.zsh" ]; then
+    source "$ZCFG/.antidote/antidote.zsh"
     antidote load
 fi
 
 # -- ALIASES --
-if [ -f ~/.zsh_aliases ]; then
-    source ~/.zsh_aliases
+if [ -f "$ZCFG/.zsh_aliases" ]; then
+    source "$ZCFG/.zsh_aliases"
 fi
 
 # -- SHELL HOOKS --
@@ -38,9 +40,14 @@ if command -v direnv >/dev/null 2>&1; then
 fi
 
 # nord dircolors
-if [ -r ~/.dir_colors ]; then
-    eval "$(dircolors "$HOME/.dir_colors")"
+if [ -r "$ZCFG/.dir_colors" ]; then
+    eval "$(dircolors "$ZCFG/.dir_colors")"
 fi
 
 # completions
 autoload -U compinit; compinit
+
+# zola on fedora
+if flatpak info org.getzola.zola >/dev/null 2>&1; then
+    alias zola='flatpak run org.getzola.zola'
+fi

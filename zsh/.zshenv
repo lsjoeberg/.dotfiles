@@ -6,6 +6,9 @@
 # Note: This file is read even when Zsh is launched to run a single command
 # (with the -c option), even by another tool like make.
 
+# -- ZDOTDIR: All zsh config files should be stored here --
+export ZDOTDIR="$HOME/.config/zsh"
+
 # -- PATH --
 export PATH="$PATH:$HOME/.local/bin:$HOME/bin"
 

@@ -1,5 +1,27 @@
 # Zsh
 
+## Structure
+
+```
+~/
+├── .zshenv                  # sets ZDOTDIR env var
+└── .config/zsh/             # all zsh configuration (ZDOTDIR)
+    ├── .zshrc               # main configuration
+    ├── .zprofile            # login env vars
+    ├── .zsh_plugins.txt     # antidote plugin list
+    └── completions/         # custom completions
+```
+
+### Completions
+
+Add custom completions; e.g. `docker`:
+
+```sh
+docker completion zsh > ~/.config/zsh/completions/_docker
+```
+
+## Load Order
+
 Shell configuration [load order]:
 
 ```txt
