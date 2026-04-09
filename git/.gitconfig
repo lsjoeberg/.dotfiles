@@ -89,6 +89,18 @@
 		--pretty=lg
 	rl  = reflog
 
+	# -- log: project health --
+	# Churn: top 20 most frequently changed files in the last year.
+	lgchurn = "!f() { git log --format='format:' --name-only --since='1 year ago' | sort | uniq -c | sort -nr | head -20; }; f"
+	# Churn: where bugs are most frequently worked on.
+	lgbugs = "!f() { git log -i -E --grep='fix|bug|broken' --name-only --format='' | sort | uniq -c | sort -nr | head -20; }; f"
+	# All contributors ranked by commit count.
+	lgwho = shortlog -sn --no-merges
+	# Activity: commit count by month.
+	lgact = "!f() { git log --format='%ad' --date=format:'%Y-%m' | sort | uniq -c; }; f"
+	# Activity: reverts and hotfixes.
+	lgfire = "!f() { git log --oneline --since='1 year ago' | grep -iE 'revert|hotfix|emergency|rollback'; }; f"
+
 	# -- utility --
 	# list all contributors and their contribtion
 	contributors = shortlog --summary --numbered --email
