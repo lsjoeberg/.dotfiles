@@ -37,7 +37,9 @@ fi
 # eza
 if command -v eza >/dev/null 2>&1; then
     alias ll='eza -a -lb --icons=auto --group-directories-first'
+    alias llg='ll --git'
     alias lt='ll --tree -I .git'
+    alias ltg='ll --tree -I .git --git'
 fi
 
 # decode jwt
