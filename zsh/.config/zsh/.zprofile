@@ -41,3 +41,14 @@ if command -v asdf >/dev/null 2>&1; then
     export PATH="${PATH}:${ASDF_DATA_DIR:-$HOME/.asdf}/shims"
     fpath=(${ASDF_DATA_DIR:-$HOME/.asdf}/completions $fpath)
 fi
+
+# docker: env var used by some third-party tools such as ctop, dtop, etc.
+if command -v docker >/dev/null 2>&1; then
+    # default installation
+    if [[ -S '/var/run/docker.sock' ]]; then
+        export DOCKER_HOST="unix:///var/run/docker.sock"
+    # rootless mode
+    elif [[ -S '/run/user/1000/docker.sock' ]]; then
+        export DOCKER_HOST="unix:///run/user/1000/docker.sock"
+    fi
+fi
