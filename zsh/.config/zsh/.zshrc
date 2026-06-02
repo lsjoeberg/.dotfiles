@@ -51,6 +51,9 @@ if [ -r "$ZCFG/.dir_colors" ]; then
 fi
 
 # completions
+if [[ -d "$ZDOTDIR/completions" ]]; then
+    fpath=( "$ZDOTDIR/completions" "${fpath[@]}" )
+fi
 autoload -U compinit; compinit
 
 # zola on fedora
