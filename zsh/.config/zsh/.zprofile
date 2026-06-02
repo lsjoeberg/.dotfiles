@@ -1,8 +1,9 @@
-# --- .zprofile (read at login) -----------------------------------------------
-# Like .zshenv but for commands and variables which should be set once or which
-# don't need to be updated frequently. For instance, environment variables to
-# configure tools or configuration which execute commands, as it may take some
-# time to execute.
+# ----------------------------------------------------------------------------
+# .zprofile is for login shells.
+# .zprofile is meant as an alternative to .zlogin for ksh fans; the two are not
+# intended to be used together, although this could certainly be done if
+# desired.
+# ----------------------------------------------------------------------------
 
 # locale
 export LANG="en_GB.UTF-8"

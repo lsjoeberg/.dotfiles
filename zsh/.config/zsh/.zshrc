@@ -22,6 +22,12 @@ if [ -f "$ZCFG/.zsh_aliases" ]; then
     source "$ZCFG/.zsh_aliases"
 fi
 
+# -- KEY BINDINGS --
+
+# Since EDITOR is set to 'nvim', 'vim', or 'vi' in .zshenv, the shell will be
+# viins mode on startup, which doesn't provide a key-binding to the widget.
+bindkey -M viins '\e.' insert-last-word
+
 # -- SHELL HOOKS --
 
 # init fzf
