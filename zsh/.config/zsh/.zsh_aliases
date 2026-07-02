@@ -24,9 +24,20 @@ if command -v lazygit >/dev/null 2>&1; then
     alias lg='lazygit'
 fi
 
+# docker
+if command -v docker >/dev/null 2>&1; then
+    alias d='docker'
+    alias dps='docker ps --format "table {{.Image}}\t{{.Status}}\t{{.Names}}"'
+fi
+
 # kubernetes
 if command -v kubectl >/dev/null 2>&1; then
     alias k='kubectl'
+fi
+
+# terraform
+if command -v terraform >/dev/null 2>&1; then
+    alias tf='terraform'
 fi
 
 # nvim
