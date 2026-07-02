@@ -265,6 +265,9 @@ return {
           },
         },
       },
+      bashls = {},
+      zls = {},
+      terraformls = {},
     }
 
     -- Ensure the servers and tools above are installed
