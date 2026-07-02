@@ -20,7 +20,17 @@ return {
       },
       lua = { "stylua" },
       rust = { "rustfmt", lsp_format = "fallback" },
-      go = { "goimports", "gofumpt" },
+      go = { "gofumpt", lsp_format = "fallback" },
+      yaml = { "yamlfmt", lsp_format = "fallback" },
+      python = { "ruff_format", "ruff_organize_imports" },
+    },
+    formatters = {
+      stylua = {
+        append_args = { "--indent-type", "Spaces", "--indent-width", "2" },
+      },
+      yamlfmt = {
+        prepend_args = { "--formatter", "retain_line_breaks_single=true" },
+      },
     },
   },
 }
