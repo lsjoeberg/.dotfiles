@@ -14,10 +14,10 @@
 	# -- branch, checkout --
 	br = branch
 	bd = branch -D
-	bl = "!f() { git -P branch -vv; }; f"
+	bl = "!f() { git -P branch -vv --sort=refname; }; f"
 	co = checkout
 	cb = checkout -b
-	cs = "!f() { git checkout stash@{\"$1\"} -- \"$2\"; }; f"
+	cs = "!f() { git checkout \"stash@{$1}\" -- \"$2\"; }; f"
 	cf = "!f() { git branch -v | fzf --ansi | tr -s ' ' | cut -f 2 -d' ' | xargs -o git checkout; }; f"
 
 	# -- commit --
@@ -26,10 +26,11 @@
 	cia = commit --amend            # append index to previous commit, edit msg
 	fu  = "!f() { git lg \"${1:--10}\" | fzf --ansi | cut -c -7 | xargs -o git commit --fixup; }; f"
 	cp  = cherry-pick
+	cpf  = "!f() { git lg \"${1:--10}\" | fzf --ansi | cut -c -7 | xargs -o git cherry-pick; }; f"
 
 	# -- status --
-	sh = show --stat               # show HEAD stats
-	st = status --short            # concise status
+	sh = "!f() { git show --stat --format=fuller ${1:-HEAD}; }; f"
+	st = status --short
 
 	# -- diff --
 	dt  = difftool
