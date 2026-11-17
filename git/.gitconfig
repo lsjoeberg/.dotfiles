@@ -124,6 +124,7 @@
 	navigate = true
 	dark = true
 	syntax-theme = Nord
+	side-by-side = true
 [diff]
 	tool = vimdiff
 	algorithm = histogram
