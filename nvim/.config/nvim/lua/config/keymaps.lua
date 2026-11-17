@@ -7,6 +7,9 @@ km.set("n", "<leader>w", "<CMD>update<CR>", { desc = "Write buffer if it has bee
 km.set("n", "<leader>q", "<CMD>q<CR>", { desc = "Quit" })
 km.set("n", "<leader>d", "<CMD>bd<CR>", { desc = "Close current buffer" })
 
+-- Save if modified and quit
+km.set("n", "<leader>x", "<CMD>xa<CR>", { desc = "Write all changed buffers and exit" })
+
 -- Diagnostics
 km.set("n", "gl", function()
   vim.diagnostic.open_float()
