@@ -20,6 +20,12 @@
 	cs = "!f() { git checkout \"stash@{$1}\" -- \"$2\"; }; f"
 	cf = "!f() { git branch -v | fzf --ansi | tr -s ' ' | cut -f 2 -d' ' | xargs -o git checkout; }; f"
 
+	# -- worktree --
+	wt = worktree
+	wa = "!f() { git worktree add ../\"$1\"; }; f"
+	wd = worktree remove
+	wl = worktree list
+
 	# -- commit --
 	ci  = commit
 	ca  = commit --amend --no-edit  # append index to previous commit
