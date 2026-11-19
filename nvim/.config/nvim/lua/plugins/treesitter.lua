@@ -1,18 +1,20 @@
 local languages = {
   "bash",
   "c",
-  "lua",
-  "markdown",
   "go",
   "gomod",
-  "gowork",
   "gosum",
   "gotmpl",
+  "gowork",
+  "hcl",
+  "java",
+  "lua",
+  "markdown",
+  "python",
   "rust",
   "toml",
-  "java",
-  "python",
   "yaml",
+  "zig",
 }
 
 return {
