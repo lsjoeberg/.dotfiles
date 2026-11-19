@@ -2,31 +2,29 @@ return {
   "nvim-treesitter/nvim-treesitter-textobjects",
   branch = "main",
   dependencies = { "nvim-treesitter/nvim-treesitter" },
-  opts = {
-    -- TODO: Rust patterns
-    textobjects = {
-      select = {
-        enable = true,
-        lookahead = true,
-        keymaps = {
-          ["af"] = "@function.outer",
-          ["if"] = "@function.inner",
-          ["ac"] = "@class.outer",
-          ["ic"] = "@class.inner",
-        },
-      },
-      swap = {
-        enable = true,
-        swap_next = {
-          ["<leader>a"] = { query = "@parameter.inner", desc = "Swap with next parameter" },
-        },
-        swap_previous = {
-          ["<leader>A"] = { query = "@parameter.inner", desc = "Swap with previous parameter" },
-        },
-      },
-    },
-  },
-  config = function(_, opts)
-    require("nvim-treesitter-textobjects").setup(opts)
+  config = function()
+    require("nvim-treesitter-textobjects").setup({
+      select = { lookahead = true },
+    })
+
+    local select = require("nvim-treesitter-textobjects.select")
+    local function map_select(lhs, query, desc)
+      vim.keymap.set({ "x", "o" }, lhs, function()
+        select.select_textobject(query, "textobjects")
+      end, { desc = desc })
+    end
+
+    map_select("af", "@function.outer", "Function")
+    map_select("if", "@function.inner", "Inner function")
+    map_select("ac", "@class.outer", "Class")
+    map_select("ic", "@class.inner", "Inner class")
+
+    local swap = require("nvim-treesitter-textobjects.swap")
+    vim.keymap.set("n", "<leader>a", function()
+      swap.swap_next("@parameter.inner")
+    end, { desc = "Swap with next parameter" })
+    vim.keymap.set("n", "<leader>A", function()
+      swap.swap_previous("@parameter.inner")
+    end, { desc = "Swap with previous parameter" })
   end,
 }

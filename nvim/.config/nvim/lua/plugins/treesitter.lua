@@ -3,50 +3,44 @@ local languages = {
   "c",
   "lua",
   "markdown",
-  -- Go
   "go",
   "gomod",
   "gowork",
   "gosum",
   "gotmpl",
-  -- Rust
   "rust",
   "toml",
+  "java",
+  "python",
+  "yaml",
 }
 
 return {
-  {
-    "nvim-treesitter/nvim-treesitter",
-    branch = "main",
-    lazy = false,
-    build = ":TSUpdate",
-  },
-  {
-    "MeanderingProgrammer/treesitter-modules.nvim",
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
-    ---@module 'treesitter-modules'
-    ---@type ts.mod.UserConfig
-    opts = {
-      -- A list of parser names, or "all" (the listed parsers MUST always be installed)
-      ensure_installed = languages,
-      -- Automatically install missing parsers when entering buffer (requires `tree-sitter` CLI installed)
-      auto_install = true,
+  "nvim-treesitter/nvim-treesitter",
+  branch = "main",
+  lazy = false,
+  build = ":TSUpdate",
+  config = function()
+    -- Async, no-op when present. Installs parser dependencies (for example markdown_inline).
+    require("nvim-treesitter").install(languages)
 
-      highlight = {
-        enable = true,
-      },
-      ident = {
-        enable = true,
-      },
-      incremental_selection = {
-        enable = true,
-        keymaps = {
-          init_selection = "<Enter>",
-          node_incremental = "<Enter>",
-          scope_incremental = false,
-          node_decremental = "<Backspace>",
-        },
-      },
-    },
-  },
+    vim.api.nvim_create_autocmd("FileType", {
+      group = vim.api.nvim_create_augroup("treesitter.setup", { clear = true }),
+      callback = function(args)
+        local lang = vim.treesitter.language.get_lang(args.match) or args.match
+        if not vim.treesitter.language.add(lang) then
+          return
+        end
+        vim.treesitter.start(args.buf, lang)
+        -- Experimental. Returns -1 when the language has no indent query.
+        vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+      end,
+    })
+
+    -- 0.12 node selection is `an` / `in`. Keep the previous keys.
+    local km = vim.keymap
+    km.set("n", "<Enter>", "van", { remap = true, desc = "Incrementally select node" })
+    km.set("x", "<Enter>", "an", { remap = true, desc = "Expand node selection" })
+    km.set("x", "<Backspace>", "in", { remap = true, desc = "Shrink node selection" })
+  end,
 }
