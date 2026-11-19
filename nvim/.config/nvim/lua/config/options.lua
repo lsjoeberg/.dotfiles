@@ -1,7 +1,15 @@
 -- GENERAL --------------------------------------------------------------------
 vim.o.mouse = "a" -- enable mouse mode
 vim.o.undofile = true -- store undos between sessions
-vim.opt.completeopt = { "menu", "menuone", "noselect" }
+-- CursorHold (document highlights) and which-key both wait on write to swap
+-- file. The default is 4s; a lower value (200-500ms) makes plugins,
+-- diagnostics, and UI feel snappier, but may increase disk/COU load on large
+-- files.
+vim.o.updatetime = 250
+
+-- The `completeopt` setting controls auto-completion popups. This config is
+-- unnecessary when using `blink.nvim`.
+-- vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
 -- Sync clipboard between OS and Neovim.
 vim.schedule(function()
@@ -9,7 +17,8 @@ vim.schedule(function()
 end)
 
 -- UI -------------------------------------------------------------------------
-vim.o.relativenumber = true -- show relative line number
+vim.o.number = true -- absolute number on the cursor line
+vim.o.relativenumber = true -- relative numbers everywhere else
 vim.o.cursorline = true -- highlight current line
 vim.o.showmode = false -- let statusline handle showing mode
 vim.o.signcolumn = "yes" -- always show signcolumn; avoid horizontal shifts
@@ -37,4 +46,5 @@ vim.o.breakindent = true -- visually indent wrapped lines
 vim.o.ignorecase = true -- ignore case when searching
 vim.o.smartcase = true -- ... unless we start with capital letter
 
--- TODO: .vimrc; categorise (or not)
+-- gq uses the same formatters as format-on-save. LSP formatexpr would diverge.
+vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
