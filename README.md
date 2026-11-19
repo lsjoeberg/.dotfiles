@@ -19,7 +19,7 @@ stow -v <pkg>
 - **Prompt**: [Starship]
 - **Emulator**: [Ghostty]
 - **Shell package manager**: [Antidote]
-- **Editor**: [Neovim] with [lazy.nvim]
+- **Editor**: [Neovim] `v0.12+` with [lazy.nvim]
 
 ### Essentials
 
@@ -28,6 +28,7 @@ stow -v <pkg>
 - `fd`
 - `fzf`
 - `ripgrep`
+- `sd`
 - `zellij`
 - `zoxide`
 
