@@ -16,6 +16,26 @@ return {
     "saghen/blink.cmp",
   },
   config = function()
+    local highlight_group = vim.api.nvim_create_augroup("lsp-highlight", { clear = true })
+
+    -- One detach handler for every buffer. Creating the augroup inside
+    -- LspAttach with clear=true dropped the handler for the previous buffer.
+    vim.api.nvim_create_autocmd("LspDetach", {
+      group = vim.api.nvim_create_augroup("lsp-detach", { clear = true }),
+      callback = function(event)
+        if not vim.api.nvim_buf_is_valid(event.buf) then
+          return
+        end
+        for _, remaining in ipairs(vim.lsp.get_clients({ bufnr = event.buf })) do
+          if remaining:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
+            return
+          end
+        end
+        vim.api.nvim_buf_call(event.buf, vim.lsp.buf.clear_references)
+        vim.api.nvim_clear_autocmds({ group = highlight_group, buffer = event.buf })
+      end,
+    })
+
     vim.api.nvim_create_autocmd("LspAttach", {
       group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
       callback = function(event)
@@ -46,29 +66,17 @@ return {
         end, "Type definition")
 
         local client = vim.lsp.get_client_by_id(event.data.client_id)
-        if
-          client
-          and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf)
-        then
-          local highlight_augroup = vim.api.nvim_create_augroup("lsp-highlight", { clear = false })
-          vim.api.nvim_clear_autocmds({ group = highlight_augroup, buffer = event.buf })
+        if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
+          vim.api.nvim_clear_autocmds({ group = highlight_group, buffer = event.buf })
           vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
             buffer = event.buf,
-            group = highlight_augroup,
+            group = highlight_group,
             callback = vim.lsp.buf.document_highlight,
           })
           vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
             buffer = event.buf,
-            group = highlight_augroup,
+            group = highlight_group,
             callback = vim.lsp.buf.clear_references,
-          })
-          vim.api.nvim_create_autocmd("LspDetach", {
-            buffer = event.buf,
-            group = vim.api.nvim_create_augroup("lsp-detach", { clear = true }),
-            callback = function(event2)
-              vim.lsp.buf.clear_references()
-              vim.api.nvim_clear_autocmds({ group = "lsp-highlight", buffer = event2.buf })
-            end,
           })
         end
 
@@ -142,20 +150,46 @@ return {
     })
 
     vim.lsp.config("lua_ls", {
+      -- before_init mutates the settings table that didChangeConfiguration sends.
+      -- on_init runs after that notification, so it would not reach the server.
+      before_init = function(_, config)
+        local root = config.root_dir
+        if
+          root
+          and root ~= vim.fn.stdpath("config")
+          and (vim.uv.fs_stat(root .. "/.luarc.json") or vim.uv.fs_stat(root .. "/.luarc.jsonc"))
+        then
+          return
+        end
+
+        config.settings = config.settings or {}
+        config.settings.Lua = vim.tbl_deep_extend("force", config.settings.Lua or {}, {
+          runtime = {
+            version = "LuaJIT",
+            path = { "lua/?.lua", "lua/?/init.lua" },
+          },
+          workspace = {
+            checkThirdParty = false,
+            library = { vim.env.VIMRUNTIME },
+          },
+        })
+      end,
       settings = {
         Lua = {
           completion = {
             callSnippet = "Replace",
-          },
-          diagnostics = {
-            globals = { "vim", "require" },
           },
         },
       },
     })
 
     require("mason-tool-installer").setup({
-      ensure_installed = vim.list_extend(vim.deepcopy(servers), { "stylua" }),
+      ensure_installed = vim.list_extend(vim.deepcopy(servers), {
+        "stylua",
+        "gofumpt",
+        "yamlfmt",
+        "ruff",
+      }),
     })
 
     -- Explicit list so a Mason-installed jdtls or rust_analyzer is not enabled
