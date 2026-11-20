@@ -50,7 +50,7 @@ if command -v mise >/dev/null 2>&1; then
     eval "$(mise activate zsh)"
 fi
 
-# nord dircolors
+# nordic dircolors
 if [ -r "$ZCFG/.dir_colors" ]; then
     eval "$(dircolors "$ZCFG/.dir_colors")"
 fi
