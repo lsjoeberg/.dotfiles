@@ -1,0 +1,162 @@
+// Nordic for Zellij.
+// Palette from AlexvZyl/nordic.nvim with reduced_blue, matching the Neovim
+// theme and the Ghostty background/foreground. ANSI colors follow Nordic's
+// terminal palette (cyan is #8FBCBB, magenta is #B48EAD).
+//
+// Selected-ribbon emphases are those hues mixed into #191D24 until they
+// clear 4.5:1 on the green tab. The bright aurora colors fail that check.
+
+themes {
+    nordic {
+        text_unselected {
+            base "#C0C8D8"
+            background "#191D24"
+            emphasis_0 "#D08770"
+            emphasis_1 "#88C0D0"
+            emphasis_2 "#A3BE8C"
+            emphasis_3 "#B48EAD"
+        }
+        text_selected {
+            base "#D8DEE9"
+            background "#2E3440"
+            emphasis_0 "#EBCB8B"
+            emphasis_1 "#88C0D0"
+            emphasis_2 "#A3BE8C"
+            emphasis_3 "#BE9DB8"
+        }
+        ribbon_unselected {
+            base "#C0C8D8"
+            background "#2E3440"
+            emphasis_0 "#EBCB8B"
+            emphasis_1 "#88C0D0"
+            emphasis_2 "#A3BE8C"
+            emphasis_3 "#C5727A"
+        }
+        ribbon_selected {
+            base "#191D24"
+            background "#A3BE8C"
+            emphasis_0 "#643C44"
+            emphasis_1 "#35455A"
+            emphasis_2 "#483F4D"
+            emphasis_3 "#59423F"
+        }
+        ribbon_hover {
+            base "#D8DEE9"
+            background "#3B4252"
+            emphasis_0 "#EBCB8B"
+            emphasis_1 "#88C0D0"
+            emphasis_2 "#A3BE8C"
+            emphasis_3 "#EFD49F"
+        }
+        table_title {
+            base "#A3BE8C"
+            background "#191D24"
+            emphasis_0 "#D08770"
+            emphasis_1 "#88C0D0"
+            emphasis_2 "#A3BE8C"
+            emphasis_3 "#B48EAD"
+        }
+        table_cell_unselected {
+            base "#C0C8D8"
+            background "#191D24"
+            emphasis_0 "#D08770"
+            emphasis_1 "#88C0D0"
+            emphasis_2 "#A3BE8C"
+            emphasis_3 "#B48EAD"
+        }
+        table_cell_selected {
+            base "#D8DEE9"
+            background "#2E3440"
+            emphasis_0 "#EBCB8B"
+            emphasis_1 "#88C0D0"
+            emphasis_2 "#A3BE8C"
+            emphasis_3 "#BE9DB8"
+        }
+        list_unselected {
+            base "#C0C8D8"
+            background "#191D24"
+            emphasis_0 "#D08770"
+            emphasis_1 "#88C0D0"
+            emphasis_2 "#A3BE8C"
+            emphasis_3 "#B48EAD"
+        }
+        list_selected {
+            base "#D8DEE9"
+            background "#2E3440"
+            emphasis_0 "#EBCB8B"
+            emphasis_1 "#88C0D0"
+            emphasis_2 "#A3BE8C"
+            emphasis_3 "#BE9DB8"
+        }
+        frame_unselected {
+            base "#60728A"
+            background "#191D24"
+            emphasis_0 "#EBCB8B"
+            emphasis_1 "#88C0D0"
+            emphasis_2 "#B48EAD"
+            emphasis_3 "#D08770"
+        }
+        frame_selected {
+            base "#A3BE8C"
+            background "#191D24"
+            emphasis_0 "#D08770"
+            emphasis_1 "#88C0D0"
+            emphasis_2 "#B48EAD"
+            emphasis_3 "#EBCB8B"
+        }
+        frame_highlight {
+            base "#EBCB8B"
+            background "#191D24"
+            emphasis_0 "#D08770"
+            emphasis_1 "#88C0D0"
+            emphasis_2 "#B48EAD"
+            emphasis_3 "#EBCB8B"
+        }
+        exit_code_success {
+            base "#A3BE8C"
+            background "#191D24"
+            emphasis_0 "#88C0D0"
+            emphasis_1 "#191D24"
+            emphasis_2 "#B48EAD"
+            emphasis_3 "#81A1C1"
+        }
+        exit_code_error {
+            base "#C5727A"
+            background "#191D24"
+            emphasis_0 "#EBCB8B"
+            emphasis_1 "#D08770"
+            emphasis_2 "#B48EAD"
+            emphasis_3 "#88C0D0"
+        }
+        multiplayer_user_colors {
+            player_1 "#B48EAD"
+            player_2 "#81A1C1"
+            player_3 "#A3BE8C"
+            player_4 "#EBCB8B"
+            player_5 "#88C0D0"
+            player_6 "#D08770"
+            player_7 "#BF616A"
+            player_8 "#8FBCBB"
+            player_9 "#E7C173"
+            player_10 "#9FC6C5"
+        }
+        terminal_colors {
+            black "#191D24"
+            red "#BF616A"
+            green "#A3BE8C"
+            yellow "#EBCB8B"
+            blue "#5E81AC"
+            magenta "#B48EAD"
+            cyan "#8FBCBB"
+            white "#C0C8D8"
+            bright_black "#3B4252"
+            bright_red "#C5727A"
+            bright_green "#B1C89D"
+            bright_yellow "#EFD49F"
+            bright_blue "#88C0D0"
+            bright_magenta "#BE9DB8"
+            bright_cyan "#9FC6C5"
+            bright_white "#D8DEE9"
+        }
+    }
+}
