@@ -36,12 +36,6 @@ if command -v sccache >/dev/null 2>&1; then
     export RUSTC_WRAPPER=sccache
 fi
 
-# asdf
-if command -v asdf >/dev/null 2>&1; then
-    export PATH="${PATH}:${ASDF_DATA_DIR:-$HOME/.asdf}/shims"
-    fpath=(${ASDF_DATA_DIR:-$HOME/.asdf}/completions $fpath)
-fi
-
 # docker: env var used by some third-party tools such as ctop, dtop, etc.
 if command -v docker >/dev/null 2>&1; then
     # default installation
